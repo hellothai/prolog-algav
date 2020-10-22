@@ -102,9 +102,19 @@ inverte1(L,L1):-inverte2(L,[],L1).
 inverte2([],L,L).
 inverte2([X|L],L2,L3):-inverte2(L,[X|L2],L3).
 
-% m) // TODO
+% m) união de dois conjuntos representados por listas
+% insere na LF caso não seja membro da L2, pois a união não
+% elementos repetidos.
 
-% n) // TODO
+une([],L,L).
+une([H|L1],L2,LF):-member(H,L2),!,une(L1,L2,LF).
+une([H|L1],L2,[H|LF]):-une(L1,L2,LF).
+
+% n) intersecçao de dois conjuntos
+
+inters([],_,[]):-!.
+inters([H|T],L2,[H|LF]):-member(H,L2),!, inters(T,L2,LF).
+inters([_|T],L2,LF):-inters(T,L2,LF).
 
 % o) // TODO
 
